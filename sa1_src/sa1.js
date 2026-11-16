@@ -83,7 +83,7 @@ export default class SA1 {
     }
     
     save(version) {
-        calculate_checksum(this.slot.checksum, this.slot.buffer);
+        this.calculate_checksum(this.slot.checksum, this.slot.buffer);
         let buffer = this.slot.buffer;
         switch (version) {
             case "sa1dcjp": {
