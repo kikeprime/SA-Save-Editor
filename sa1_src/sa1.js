@@ -83,7 +83,7 @@ export default class SA1 {
     }
     
     save(version) {
-        calculate_checksum(this.checksum, this.slot.buffer);
+        calculate_checksum(this.slot.checksum, this.slot.buffer);
         let buffer = this.slot.buffer;
         switch (version) {
             case "sa1dcjp": {
@@ -252,7 +252,9 @@ export default class SA1 {
     
     // ToDo
     suggestedName(version) {
-        return this.file.name;
+        if (this.file)
+            return this.file.name;
+        return "SonicDX01.snc";
     }
     
     get slot() {
