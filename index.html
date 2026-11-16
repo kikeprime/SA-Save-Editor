@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Sonic Adventure Save Editor Online</title>
+        <link rel="stylesheet" type="text/css" href="assets/style.css">
+        <link rel="icon" type="image/x-icon" href="assets/SonicDXLife.ico">
+    </head>
+    <body>
+        <div style="margin-bottom: 10px">
+            <div style="display: flex; align-items: center; gap: 40px">
+                <div>
+                    <h1 style="font-size: 30px; display: flex; align-items: center; gap: 10px">
+                        Sonic Adventure Save Editor Online
+                        <img src="assets/SonicDXLife.ico" height="48">
+                    </h1>
+                </div>
+                <details>
+                    <summary>
+                        Series Selector
+                    </summary>
+                    <a href="https://kikeprime.github.io/KH-Save-Editor" style="display: block">
+                        <img src="assets/FHDR.png" height="32">
+                    </a>
+                    <a href="https://kikeprime.github.io/Orbal-Save-Editor" style="display: block">
+                        <img src="assets/Estelle (Sora FC Orbment).png" height="32">
+                    </a>
+                    <a href="https://kikeprime.github.io/SA-Save-Editor" style="display: block">
+                        <img src="assets/SonicDXLife.ico" height="32">
+                    </a>
+                </details>
+            </div>
+            <div style="display: flex; align-items: center; gap: 20px">
+                <div>
+                    <h2 for="game">Select Game:</h2>
+                    <select id="game">
+                        <optgroup label="Sonic Adventure">
+                            <option value="sa1dc">SA1 Dreamcast</option>
+                            <option value="sa1gc">SADX GameCube</option>
+                            <option value="sa1pc" selected>SADX 2004 PC</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div>
+                    <h2 for="outgame">Select Target:</h2>
+                    <select id="outgame">
+                        <optgroup label="Sonic Adventure">
+                            <option value="sa1dcjp">SA1 Dreamcast Japan</option>
+                            <option value="sa1dcusa">SA1 Dreamcast USA</option>
+                            <option value="sa1dcint">SA1 Dreamcast International</option>
+                            <option value="sa1gc">SADX GameCube</option>
+                            <option value="sa1gcpv">SADX GameCube Preview</option>
+                            <option value="sa1pc" selected>SADX 2004 PC</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+            <div style="display: flex; gap: 20px">
+                <div id="dc_slot_load">
+                    <h2>Dreamcast Slot Loading:</h2>
+                    <div style="display: flex; align-items: center; gap: 20px">
+                        Slot 1:
+                        <select>
+                            <option value=-1>Ignore</option>
+                            <option value=0 selected>Slot 1</option>
+                            <option value=1>Slot 2</option>
+                            <option value=2>Slot 3</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 20px">
+                        Slot 2:
+                        <select>
+                            <option value=-1>Ignore</option>
+                            <option value=0>Slot 1</option>
+                            <option value=1 selected>Slot 2</option>
+                            <option value=2>Slot 3</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 20px">
+                        Slot 3:
+                        <select>
+                            <option value=-1>Ignore</option>
+                            <option value=0>Slot 1</option>
+                            <option value=1>Slot 2</option>
+                            <option value=2 selected>Slot 3</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <h2>Current Slot:</h2>
+                    <div>
+                        <select id="slot">
+                            <option value=0>Slot 1</option>
+                            <option value=1>Slot 2</option>
+                            <option value=2>Slot 3</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex">
+                <div>
+                    <h2>Select Save File:</h2>
+                    <input type="file" id="mainsavefile">
+                </div>
+            </div>
+            <div style="display: flex; gap: 20px">
+                <a href="https://github.com/kikeprime/SA-Save-Editor"><button>Source Code</button></a>
+            </div>
+            <div>
+                <h2>Download Edited Save File:</h2>
+                <button id="save" style="width: 100px">Save</button>
+            </div>
+        </div>
+        <div id="app"></div>
+        <script type="module">
+            import SA1 from "./sa1_src/sa1.js";
+            const app = document.getElementById("app");
+            const game = document.getElementById("game");
+            const outgame = document.getElementById("outgame");
+            const dc_slot_load = document.getElementById("dc_slot_load");
+            const slot = document.getElementById("slot");
+            const mainsavefile = document.getElementById("mainsavefile");
+            window.sa1 = new SA1();
+            await window.sa1.loaded;
+            sa1.menu();
+            slot.addEventListener("change", () => sa1.menu());
+            mainsavefile.addEventListener("change", async () => {
+                const file = mainsavefile.files[0];
+                outgame.value = game.value;
+                const slot_settings = Array.from(dc_slot_load.querySelectorAll("select"))
+                    .map(select => select.value);
+                switch (game.value) {
+                    case "sa1dc":
+                    case "sa1gc":
+                    case "sa1pc": {
+                        await sa1.load(file, game.value, slot.value, slot_settings);
+                        console.log(String(sa1));
+                        sa1.menu();
+                        break;
+                    }
+                    default:
+                        break;
+                }
+            });
+            const save = document.getElementById("save");
+            save.addEventListener("click", async () => {
+                switch (outgame.value) {
+                    case "sa1dcjp":
+                    case "sa1dcusa":
+                    case "sa1dcint":
+                    case "sa1gc":
+                    case "sa1gcpv":
+                    case "sa1pc": {
+                        try {
+                            const picker = await window.showSaveFilePicker({suggestedName: sa1.suggestedName(outgame.value)});
+                            const writable = await picker.createWritable();
+                            await writable.write(sa1.save(outgame.value));
+                            await writable.close();
+                        } catch (e) {
+                            if (e.name == "AbortError") return;
+                            return e;
+                        }
+                        break;
+                    }
+                }
+            });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/eruda@3.4.2"></script>
+        <script>
+            eruda.init({
+                defaults: {
+                    displaySize: 70,
+                }
+            });
+            eruda.position({x: 450, y: 100});
+        </script>
+        <!--
+        <script src="https://cdn.sheetjs.com/crc-32-latest/package/crc32.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/js-md5@0.9.2"></script>
+        <script src="https://cdn.jsdelivr.net/npm/aes-js@3.1.2"></script>
+        -->
+    </body>
+</html>

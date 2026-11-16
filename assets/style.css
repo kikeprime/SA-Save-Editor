@@ -1,0 +1,35 @@
+h1, h2, h3, h4, h5, h6 {
+    color: #0088CE;
+}
+
+label, select, input, button {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 15px;
+  height: 40px;
+}
+
+.sa1-emblem, .sa1-metal-emblem {
+  appearance: none;
+  width: 40px;
+  height: 40px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.sa1-emblem:checked {
+  background-image: url("emblem.png");
+}
+
+.sa1-emblem:not(:checked) {
+  background-image: url("noemblem.png");
+}
+
+.sa1-metal-emblem:checked {
+  background-image: url("metal_emblem.png");
+}
+
+.sa1-metal-emblem:not(:checked) {
+  background-image: url("metal_noemblem.png");
+}
