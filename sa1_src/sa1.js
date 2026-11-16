@@ -103,7 +103,7 @@ export default class SA1 {
             }
             case "sa1gc": {
                 buffer = this.templates[3].slice();
-                buffer.set(byteswap(this.slot.buffer.slice()), this.GCHeader);
+                buffer.set(this.byteswap(this.slot.buffer.slice()), this.GCHeader);
                 break;
             }
             case "sa1gcpv": {
@@ -112,7 +112,7 @@ export default class SA1 {
                 const data = new DataView(slot.buffer);
                 const checksum = new dt.U16(0x0000, data);
                 this.calculate_checksum(checksum, slot);
-                buffer.set(byteswap(slot), this.GCHeader);
+                buffer.set(this.byteswap(slot), this.GCHeader);
                 break;
             }
         }
@@ -128,9 +128,66 @@ export default class SA1 {
             this.calculate_checksum(checksum, slot);
             buffer.set(slot, offset);
         }
-        const data = new DataView(buffer);
+        const data = new DataView(buffer.buffer);
         const checksum = new dt.U16(0x46, data);
-        this.calculate_vms_src(checksum, buffer);
+        this.calculate_vms_crc(checksum, buffer);
+    }
+    
+    calculate_checksum(checksum, buffer) {
+        checksum.value = 0xFFFF;
+        for (let i = 4; i < buffer.length; i++) {
+            checksum.value ^= buffer[i];
+            for (let j = 0; j < 8; j++) {
+                if (checksum.value & 1)
+                    checksum.value = (checksum.value >> 1) ^ 0x8408;
+                else
+                    checksum.value >>= 1;
+            }
+        }
+        checksum.value = ~checksum.value;
+        return buffer;
+    }
+    
+    calculate_vms_crc(checksum, buffer) {
+        checksum.value = 0;
+        for (let i = 4; i < buffer.length; i++) {
+            checksum.value ^= (buffer[i] << 8);
+            for (let j = 0; j < 8; j++) {
+                if (checksum.value & 0x8000)
+                    checksum.value = (checksum.value << 1) ^ 0x1021;
+                else
+                    checksum.value <<= 1;
+            }
+        }
+        return buffer;
+    }
+    
+    byteswap(buffer) {
+        function reverse(offset, length) {
+            buffer.subarray(offset, offset + length).reverse();
+        }
+        for (let i = 0; i < 34; i++)
+            reverse(i * 4, 4);
+        for (let i = 0; i < 12; i++)
+            reverse(0x00DC + (i * 4), 2);
+        for (let i = 0; i < 32; i++)
+            reverse(0x0104 + (i * 4), 2);
+        for (let i = 0; i < 27; i++)
+            reverse(0x0144 + (i * 4), 4);
+        reverse(0x025C, 2);
+        for (let i = 0; i < 8; i++)
+			for (let j = 1; j < 5; j++)
+				reverse(0x02E8 + (i * 0x0C) + (j * 2), 2);
+        if (buffer.length > this.SA1Size) {
+			for (let i = 0; i < 11; i++)
+				reverse(0x04DC + (i * 4), 4);
+			for (let i = 0; i < 10; i++)
+				reverse(0x0526 + (i * 2), 2);
+			for (let i = 0; i < 6; i++)
+				reverse(0x053C + (i * 4), 4);
+			reverse(0x056C, 4);
+		}
+		return buffer;
     }
     
     menu() {
@@ -191,63 +248,6 @@ export default class SA1 {
             }
         });
         tab_sel();
-    }
-    
-    calculate_checksum(checksum, buffer) {
-        checksum.value = 0xFFFF;
-        for (let i = 4; i < buffer.length; i++) {
-            checksum.value ^= buffer[i];
-            for (let j = 0; j < 8; j++) {
-                if (checksum.value & 1)
-                    checksum.value = (checksum.value >> 1) ^ 0x8408;
-                else
-                    checksum.value >>= 1;
-            }
-        }
-        checksum.value = ~checksum.value;
-        return buffer;
-    }
-    
-    calculate_vms_src(checksum, buffer) {
-        checksum.value = 0;
-        for (let i = 4; i < buffer.length; i++) {
-            checksum.value ^= (buffer[i] << 8);
-            for (let j = 0; j < 8; j++) {
-                if (checksum.value & 0x8000)
-                    checksum.value = (checksum.value << 1) ^ 0x1021;
-                else
-                    checksum.value <<= 1;
-            }
-        }
-        return buffer;
-    }
-    
-    byteswap(buffer) {
-        function reverse(offset, length) {
-            buffer.subarray(offset, offset + length).reverse();
-        }
-        for (let i = 0; i < 34; i++)
-            reverse(i * 4, 4);
-        for (let i = 0; i < 12; i++)
-            reverse(0x00DC + (i * 4), 2);
-        for (let i = 0; i < 32; i++)
-            reverse(0x0104 + (i * 4), 2);
-        for (let i = 0; i < 27; i++)
-            reverse(0x0144 + (i * 4), 4);
-        reverse(0x025C, 2);
-        for (let i = 0; i < 8; i++)
-			for (let j = 1; j < 5; j++)
-				reverse(0x02E8 + (i * 0x0C) + (j * 2), 2);
-        if (buffer.length > this.SA1Size) {
-			for (let i = 0; i < 11; i++)
-				reverse(0x04DC + (i * 4), 4);
-			for (let i = 0; i < 10; i++)
-				reverse(0x0526 + (i * 2), 2);
-			for (let i = 0; i < 6; i++)
-				reverse(0x053C + (i * 4), 4);
-			reverse(0x056C, 4);
-		}
-		return buffer;
     }
     
     // ToDo
