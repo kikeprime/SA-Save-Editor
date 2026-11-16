@@ -126,7 +126,6 @@
             slot.addEventListener("change", () => sa1.menu());
             mainsavefile.addEventListener("change", async () => {
                 const file = mainsavefile.files[0];
-                outgame.value = game.value;
                 const slot_settings = Array.from(dc_slot_load.querySelectorAll("select"))
                     .map(select => select.value);
                 switch (game.value) {

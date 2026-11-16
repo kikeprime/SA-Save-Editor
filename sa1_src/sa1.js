@@ -66,9 +66,9 @@ export default class SA1 {
         for (let i = 0; i < 3; i++) {
             const j = slot_settings[i];
             if (j != -1) {
-                slots[j] = new SA1Slot(this.templates[5].slice());
+                this.slots[j] = new SA1Slot(this.templates[5].slice());
                 const offset = this.DCHeader + i * this.SA1Size;
-                slots[j].buffer.set(buffer.slice(offset, offset + this.SA1Size));
+                this.slots[j].buffer.set(buffer.slice(offset, offset + this.SA1Size));
             }
         }
     }
