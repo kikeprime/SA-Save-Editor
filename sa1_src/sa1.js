@@ -265,12 +265,21 @@ export default class SA1 {
         return `SA1(
     Slot 1 (
         Playtime: ${this.slots[0].get_playtime()},
+        Messages: ${this.MessageOptions[(this.slots[0].options.value >> 1) & 1]},
+        Voice Language: ${this.VoiceLanguages[(this.slots[0].options.value >> 2) & 3]},
+        Text Language: ${this.TextLanguages[(this.slots[0].options.value >> 4) & 7]},
     ),
     Slot 2 (
         Playtime: ${this.slots[1].get_playtime()},
+        Messages: ${this.MessageOptions[(this.slots[1].options.value >> 1) & 1]},
+        Voice Language: ${this.VoiceLanguages[(this.slots[1].options.value >> 2) & 3]},
+        Text Language: ${this.TextLanguages[(this.slots[1].options.value >> 4) & 7]},
     ),
     Slot 3 (
         Playtime: ${this.slots[2].get_playtime()},
+        Messages: ${this.MessageOptions[(this.slots[2].options.value >> 1) & 1]},
+        Voice Language: ${this.VoiceLanguages[(this.slots[2].options.value >> 2) & 3]},
+        Text Language: ${this.TextLanguages[(this.slots[2].options.value >> 4) & 7]},
     ),
 )`;
     }
@@ -330,18 +339,21 @@ class SA1Slot {
         this.twinkle_circuit_times = dt.Array(dt.U8, 90, 0x01B0, this.data);
         this.boss_times = [];
         for (let i = 0; i < 6; i++) {
-            this.boss_times.push(
-                dt.Array(dt.U8, 3, 0x020A+i*0x03, this.data),
-            );
+			this.boss_times[i] = [];
+			for (let j = 0; j < 3; j++) {
+				this.boss_times[i].push(
+					dt.Array(dt.U8, 3, 0x020A+i*0x09, this.data),
+				);
+			}
         }
-        this.emblems = dt.Array(dt.U8, 17, 0x021C, this.data);
-        this.options = new dt.U8(0x022D, this.data);
-        this.lives = dt.Array(dt.U8, 7, 0x022E, this.data);
-        this.last_character = new dt.U8(0x0235, this.data);
-        this.rumble = new dt.U8(0x0236, this.data);
-        this.last_level = new dt.U16(0x0238, this.data);
-        this.event_flags = dt.Array(dt.U8, 64, 0x023C, this.data);
-        this.npc_flags = dt.Array(dt.U8, 64, 0x027C, this.data);
+        this.emblems = dt.Array(dt.U8, 17, 0x0240, this.data);
+        this.options = new dt.U8(0x0251, this.data);
+        this.lives = dt.Array(dt.U8, 7, 0x0252, this.data);
+        this.last_character = new dt.U8(0x0259, this.data);
+        this.rumble = new dt.U8(0x025A, this.data);
+        this.last_level = new dt.U16(0x025C, this.data);
+        this.event_flags = dt.Array(dt.U8, 64, 0x0260, this.data);
+        this.npc_flags = dt.Array(dt.U8, 64, 0x02A0, this.data);
         this.adventure_mode = [];
         for (let i = 0; i < 8; i++) {
             this.adventure_mode.push({
@@ -362,6 +374,20 @@ class SA1Slot {
         // SADX
         this.missions = dt.Array(dt.U8, 60, 0x04A0, this.data);
         this.black_market_rings = new dt.U32(0x04DC, this.data);
+        this.metal_level_scores = dt.Array(dt.U32, 10, 0x04E0, this.data);
+        this.metal_level_times = [];
+        for (let i = 0; i < 10; i++) {
+            this.metal_level_times.push(
+                dt.Array(dt.U8, 3, 0x0508+i*0x03, this.data),
+            );
+        }
+        this.metal_level_rings = dt.Array(dt.U16, 10, 0x0526, this.data);
+        this.metal_ice_cap_scores = dt.Array(dt.U32, 3, 0x053C, this.data);
+        this.metal_sand_hill_scores = dt.Array(dt.U32, 3, 0x0548, this.data);
+        // ToDo
+        this.metal_twinkle_circuit_times = dt.Array(dt.U8, 15, 0x0554, this.data);
+		this.metal_boss_times = dt.Array(dt.U8, 3, 0x0263, this.data);
+		this.metal_emblems = dt.Array(dt.U8, 4, 0x026C, this.data);
     }
     
     get_playtime(fps = 60) {

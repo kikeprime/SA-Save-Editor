@@ -14,6 +14,12 @@ Hosted via GitHub Pages at: https://kikeprime.github.io/SA-Save-Editor
 ## Sonic Adventure
 - General:
     - Playtime
+    - Messages
+    - Voice Language
+    - Text Language
+    - Rumble
+    - Last Character
+    - Last Level
 ## Sonic Adventure DX
 - General:
     - Black Market Rings
