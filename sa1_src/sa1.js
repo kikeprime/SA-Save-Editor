@@ -241,6 +241,14 @@ export default class SA1 {
                     tabs.create_general();
                     break;
                 }
+                case "Missions": {
+                    tabs.create_missions();
+                    break;
+                }
+                case "General DX": {
+                    tabs.create_general_dx();
+                    break;
+                }
                 default: {
                     sa1div.innerHTML = "";
                     break;

@@ -23,6 +23,7 @@ Hosted via GitHub Pages at: https://kikeprime.github.io/SA-Save-Editor
 ## Sonic Adventure DX
 - General:
     - Black Market Rings
+- Missions
 
 # Documentation
 For now, `sa1_src/sa1.js` doubles as save file documentations for the respective games. It's another long term goal to create user-friendly documentations.
