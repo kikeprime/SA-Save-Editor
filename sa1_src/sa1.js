@@ -192,6 +192,7 @@ export default class SA1 {
     
     menu() {
         const app = document.getElementById("app");
+        const slot = document.getElementById("slot");
         const tabs_sa1_html = `
         <div>
             <h2>SA1 Tabs:</h2>
@@ -235,7 +236,7 @@ export default class SA1 {
             }
         }
         tabs_sa1.addEventListener("change", () => tab_sel());
-        sa1subtabs.addEventListener("change", () => {
+        function subtab_sel() {
             switch (sa1subtabs.value) {
                 case "General": {
                     tabs.create_general();
@@ -258,7 +259,9 @@ export default class SA1 {
                     break;
                 }
             }
-        });
+        }
+        sa1subtabs.addEventListener("change", () => subtab_sel());
+        slot.addEventListener("change", () => subtab_sel());
         tab_sel();
     }
     

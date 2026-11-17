@@ -123,7 +123,6 @@
             window.sa1 = new SA1();
             await window.sa1.loaded;
             sa1.menu();
-            slot.addEventListener("change", () => sa1.menu());
             mainsavefile.addEventListener("change", async () => {
                 const file = mainsavefile.files[0];
                 const slot_settings = Array.from(dc_slot_load.querySelectorAll("select"))
