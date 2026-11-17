@@ -241,6 +241,10 @@ export default class SA1 {
                     tabs.create_general();
                     break;
                 }
+                case "Level Clear Count": {
+                    tabs.create_level_clear_count();
+                    break;
+                }
                 case "Missions": {
                     tabs.create_missions();
                     break;
