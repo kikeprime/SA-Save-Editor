@@ -101,9 +101,13 @@ export default class SA1 {
                 this.save_dc(buffer);
                 break;
             }
-            case "sa1gc": {
+            case "sa1gcjp":
+            case "sa1gcusa":
+            case "sa1gceu": {
                 buffer = this.templates[3].slice();
                 buffer.set(this.byteswap(this.slot.buffer.slice()), this.GCHeader);
+				if (!version.endsWith("usa"))
+					buffer[3] = new TextEncoder("ASCII").encode(version.endsWith("jp") ? 'J' : 'P');
                 break;
             }
             case "sa1gcpv": {

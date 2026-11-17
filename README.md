@@ -1,7 +1,8 @@
 # Sonic Adventure Save Editor Online
 List of supported games:
 - Sonic Adventure Dreamcast: Japan, USA, International (JP rerelease)
-- Sonic Adventure DX: Director's Cut GameCube & GameCube Preview
+- Sonic Adventure DX: Director's Cut GameCube: Japan, USA, Europe
+- Sonic Adventure DX: Director's Cut GameCube Preview
 - Sonic Adventure DX: Director's Cut 2004 PC
 
 An online save editor remake of SASave from SA Tools to create a crossplatform Sonic Adventure save editor. The projects current scope is a straightforward reimplementation of SASave. This means the following differences from my previous save editor projects. One, I'm not researching the save file myself. Two, on crosssave, a template file from SASave's repo is used to create the save file. Under the hood your loaded save file is converted to PC format which is easily converted to all versions.
