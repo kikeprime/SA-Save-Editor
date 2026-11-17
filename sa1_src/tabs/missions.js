@@ -4,7 +4,7 @@ export function create_missions() {
         return `
         <tr>
             <td>Mission ${idx+1}</td>
-            <th>
+            <td>
                 <input
                     type="checkbox"
                     name=${idx}
@@ -13,7 +13,7 @@ export function create_missions() {
                     ${mission & (1 << 6) ? "checked" : ""}
                 >
             </td>
-            <th>
+            <td>
                 <input
                     type="checkbox"
                     name=${idx}
