@@ -28,6 +28,15 @@ Hosted via GitHub Pages at: https://kikeprime.github.io/SA-Save-Editor
         - Rumble
         - Last Character
         - Last Level
+    - Adventure:
+        - Lives
+        - Story Emblem
+        - Time of Day
+        - Sequence
+        - Next Sequence
+        - Entrance
+        - Level & Act
+        - Destination
     - Level Clear Count:
         - Level Clear Counts
 - Sonic Adventure DX

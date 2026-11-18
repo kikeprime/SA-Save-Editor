@@ -253,6 +253,10 @@ export default class SA1 {
                     tabs.create_general();
                     break;
                 }
+                case "Adventure": {
+                    tabs.create_adventure();
+                    break;
+                }
                 case "Level Clear Count": {
                     tabs.create_level_clear_count();
                     break;
@@ -278,8 +282,12 @@ export default class SA1 {
     
     // ToDo
     suggestedName(version) {
-        if (this.file)
-            return this.file.name;
+        if (version.contains("dc")) {
+            return "SONICADV_INT.vms";
+        }
+        if (version.contains("gc")) {
+            return "SonicDX01.gci";
+        }
         return "SonicDX01.snc";
     }
     
@@ -394,11 +402,12 @@ class SA1Slot {
         this.adventure_mode = [];
         for (let i = 0; i < 8; i++) {
             this.adventure_mode.push({
-                "time_of_day": new dt.U16(0x02E8+i*0x0C+0x00, this.data),
+                "time_of_day": new dt.U8(0x02E8+i*0x0C+0x00, this.data),
                 "current_sequence": new dt.S16(0x02E8+i*0x0C+0x02, this.data),
                 "next_sequence": new dt.S16(0x02E8+i*0x0C+0x04, this.data),
                 "entrance": new dt.U16(0x02E8+i*0x0C+0x06, this.data),
-                "level": new dt.U16(0x02E8+i*0x0C+0x08, this.data),
+                "act": new dt.U8(0x02E8+i*0x0C+0x08, this.data),
+                "level": new dt.U8(0x02E8+i*0x0C+0x09, this.data),
                 "destination": new dt.S16(0x02E8+i*0x0C+0x0A, this.data),
             });
         }
