@@ -12,6 +12,12 @@ The SA2 Save Utility's port is also considered but currently not planned.
 Hosted via GitHub Pages at: https://kikeprime.github.io/SA-Save-Editor
 
 # Features
+## Formats
+- Dreamcast .vms: Input and Output
+- Dreamcast .dci: Input Only (recognized by extension; case insensitive; wasn't in SASave)
+- GameCube .gci: Input and Output
+- PC .snc: Input and Output
+
 ## Sonic Adventure
 - Sonic Adventure
     - General:

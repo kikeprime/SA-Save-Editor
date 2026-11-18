@@ -11,6 +11,7 @@ export default class SA1 {
 		this.SADXSize = 0x570;
 		this.SA2010Size = 0x580;
 		this.DCHeader = 0x480;
+		this.DCIHeader = this.DCHeader + 0x20;
 		this.GCHeader = 0x1480;
 		this.X360Header = 4;
     }
@@ -31,7 +32,8 @@ export default class SA1 {
         const buffer = new Uint8Array(await file.arrayBuffer());
         switch (version) {
             case "sa1dc": {
-                this.load_dc(buffer, slot_settings);
+                const dci = file.name.toLowerCase().endsWith(".dci");
+                this.load_dc(buffer, slot_settings, dci);
                 break;
             }
             case "sa1gc": {
@@ -62,12 +64,17 @@ export default class SA1 {
         );
     }
     
-    load_dc(buffer, slot_settings) {
+    load_dc(buffer, slot_settings, dci) {
+        if (dci) {
+            for (let i = this.DCIHeader; i < buffer.length; i += 4) {
+                buffer.subarray(i, i + 4).reverse();
+            }
+        }
         for (let i = 0; i < 3; i++) {
             const j = slot_settings[i];
             if (j != -1) {
                 this.slots[j] = new SA1Slot(this.templates[5].slice());
-                const offset = this.DCHeader + i * this.SA1Size;
+                const offset = (dci ? this.DCIHeader : this.DCHeader) + i * this.SA1Size;
                 this.slots[j].buffer.set(buffer.slice(offset, offset + this.SA1Size));
             }
         }
