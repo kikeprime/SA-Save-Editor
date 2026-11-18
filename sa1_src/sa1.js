@@ -354,8 +354,19 @@ class SA1Slot {
             );
         }
         this.hedgehog_hammer_scores = dt.Array(dt.S32, 3, 0x01A4, this.data);
-        // ToDo
         this.twinkle_circuit_times = dt.Array(dt.U8, 90, 0x01B0, this.data);
+        this.twinkle_circuit_times = [];
+        for (let i = 0; i < 6; i++) {
+            this.twinkle_circuit_times.push({
+                "best_times": [
+                    dt.Array(dt.U8, 3, 0x01B0+i*0x0F+0x00, this.data),
+                    dt.Array(dt.U8, 3, 0x01B0+i*0x0F+0x03, this.data),
+                    dt.Array(dt.U8, 3, 0x01B0+i*0x0F+0x06, this.data),
+                ],
+                "lap1_time": dt.Array(dt.U8, 3, 0x01B0+i*0x0F+0x09, this.data),
+                "lap2_time": dt.Array(dt.U8, 3, 0x01B0+i*0x0F+0x0C, this.data),
+            });
+        }
         this.boss_times = [];
         for (let i = 0; i < 6; i++) {
 			this.boss_times[i] = [];
@@ -403,10 +414,23 @@ class SA1Slot {
         this.metal_level_rings = dt.Array(dt.U16, 10, 0x0526, this.data);
         this.metal_ice_cap_scores = dt.Array(dt.U32, 3, 0x053C, this.data);
         this.metal_sand_hill_scores = dt.Array(dt.U32, 3, 0x0548, this.data);
-        // ToDo
         this.metal_twinkle_circuit_times = dt.Array(dt.U8, 15, 0x0554, this.data);
-		this.metal_boss_times = dt.Array(dt.U8, 3, 0x0263, this.data);
-		this.metal_emblems = dt.Array(dt.U8, 4, 0x026C, this.data);
+        this.metal_twinkle_circuit_times = {
+            "best_times": [
+                dt.Array(dt.U8, 3, 0x0554+0x00, this.data),
+                dt.Array(dt.U8, 3, 0x0554+0x03, this.data),
+                dt.Array(dt.U8, 3, 0x0554+0x06, this.data),
+            ],
+            "lap1_time": dt.Array(dt.U8, 3, 0x0554+0x09, this.data),
+            "lap2_time": dt.Array(dt.U8, 3, 0x0554+0x0C, this.data),
+        };
+		this.metal_boss_times = [];
+        for (let i = 0; i < 3; i++) {
+    		this.metal_boss_times.push(
+    		    dt.Array(dt.U8, 3, 0x0563+i*0x03, this.data),
+    		);
+        }
+		this.metal_emblems = dt.Array(dt.U8, 4, 0x056C, this.data);
     }
     
     get_playtime(fps = 60) {
