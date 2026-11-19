@@ -257,6 +257,10 @@ export default class SA1 {
                     tabs.create_adventure();
                     break;
                 }
+                case "Story Flags": {
+                    tabs.create_story_flags();
+                    break;
+                }
                 case "Cutscene Flags": {
                     tabs.create_cutscene_flags();
                     break;

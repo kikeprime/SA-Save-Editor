@@ -37,6 +37,7 @@ Hosted via GitHub Pages at: https://kikeprime.github.io/SA-Save-Editor
         - Entrance
         - Level & Act
         - Destination
+    - Story Flags
     - Cutscene Flags
     - Level Clear Counts
 - Sonic Adventure DX:
