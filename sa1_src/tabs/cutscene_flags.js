@@ -20,13 +20,13 @@ export function create_cutscene_flags() {
         .join("");
     sa1div.innerHTML = `
     <table id="cutscene_flags">
-        <tdead>
+        <thead>
             <tr>
                 <td></td>
                 <td>ID</td>
                 <td>Description</td>
             </tr>
-        </tdead>
+        </thead>
         <tbody>
             ${cutscene_flags}
         </tbody>

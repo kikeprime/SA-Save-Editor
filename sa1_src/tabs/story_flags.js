@@ -12,14 +12,14 @@ export function create_story_flags() {
         <option value=7>Big</option>
     </select>
     <table>
-        <tdead>
+        <thead>
             <tr>
                 <td></td>
                 <td>ID</td>
                 <td>Name</td>
                 <td>Description</td>
             </tr>
-        </tdead>
+        </thead>
         <tbody id="story_flags">
         </tbody>
     </table>`;
