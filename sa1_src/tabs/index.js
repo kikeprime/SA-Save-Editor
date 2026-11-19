@@ -1,5 +1,6 @@
 export { create_general } from "./general.js"
 export { create_adventure } from "./adventure.js"
-export { create_level_clear_count } from "./level_clear_count.js"
+export { create_cutscene_flags } from "./cutscene_flags.js"
+export { create_level_clear_counts } from "./level_clear_counts.js"
 export { create_general_dx } from "./general_dx.js"
 export { create_missions } from "./missions.js"

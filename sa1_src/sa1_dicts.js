@@ -4,6 +4,7 @@ import * as d from "./dicts/index.js"
 export default function dicts(obj) {
     main_dicts(obj);
     d.level_dicts(obj);
+    d.flags_dicts(obj);
 }
 
 function main_dicts(obj) {

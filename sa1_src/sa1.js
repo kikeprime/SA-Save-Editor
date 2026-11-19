@@ -230,7 +230,7 @@ export default class SA1 {
                     <option value="Extra Emblems">Extra Emblems</option>
                     <option value="Story Flags">Story Flags</option>
                     <option value="Cutscene Flags">Cutscene Flags</option>
-                    <option value="Level Clear Count">Level Clear Count</option>
+                    <option value="Level Clear Counts">Level Clear Counts</option>
                     `;
                     tabs.create_general();
                     break;
@@ -257,8 +257,12 @@ export default class SA1 {
                     tabs.create_adventure();
                     break;
                 }
-                case "Level Clear Count": {
-                    tabs.create_level_clear_count();
+                case "Cutscene Flags": {
+                    tabs.create_cutscene_flags();
+                    break;
+                }
+                case "Level Clear Counts": {
+                    tabs.create_level_clear_counts();
                     break;
                 }
                 case "Missions": {
@@ -397,8 +401,8 @@ class SA1Slot {
         this.last_character = new dt.U8(0x0259, this.data);
         this.rumble = new dt.U8(0x025A, this.data);
         this.last_level = new dt.U16(0x025C, this.data);
-        this.event_flags = dt.Array(dt.U8, 64, 0x0260, this.data);
-        this.npc_flags = dt.Array(dt.U8, 64, 0x02A0, this.data);
+        this.story_flags = dt.Array(dt.U8, 64, 0x0260, this.data);
+        this.cutscene_flags = dt.Array(dt.U8, 64, 0x02A0, this.data);
         this.adventure_mode = [];
         for (let i = 0; i < 8; i++) {
             this.adventure_mode.push({

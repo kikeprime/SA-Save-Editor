@@ -25,7 +25,7 @@ export function level_dicts(obj) {
 		"Egg Viper",
 		"ZERO",
 		"E-101 Beta",
-		"E-101mkII",
+		"E-101 mkII",
 		"Station Square",
 		"Unused",
 		"Unused",

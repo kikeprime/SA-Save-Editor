@@ -19,7 +19,7 @@ Hosted via GitHub Pages at: https://kikeprime.github.io/SA-Save-Editor
 - PC .snc: Input and Output
 
 ## Sonic Adventure
-- Sonic Adventure
+- Sonic Adventure:
     - General:
         - Playtime
         - Messages
@@ -37,9 +37,9 @@ Hosted via GitHub Pages at: https://kikeprime.github.io/SA-Save-Editor
         - Entrance
         - Level & Act
         - Destination
-    - Level Clear Count:
-        - Level Clear Counts
-- Sonic Adventure DX
+    - Cutscene Flags
+    - Level Clear Counts
+- Sonic Adventure DX:
     - General:
         - Black Market Rings
     - Missions
