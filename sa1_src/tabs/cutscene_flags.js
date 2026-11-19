@@ -19,7 +19,7 @@ export function create_cutscene_flags() {
         </tr>`)
         .join("");
     sa1div.innerHTML = `
-    <table id="cutscene_flags">
+    <table id="cutscene_flags" border="1px">
         <thead>
             <tr>
                 <td></td>

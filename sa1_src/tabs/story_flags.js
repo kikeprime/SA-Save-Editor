@@ -11,7 +11,7 @@ export function create_story_flags() {
         <option value=6>Gamma</option>
         <option value=7>Big</option>
     </select>
-    <table>
+    <table border="1px">
         <thead>
             <tr>
                 <td></td>

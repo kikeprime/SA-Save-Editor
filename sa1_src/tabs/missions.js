@@ -4,37 +4,37 @@ export function create_missions() {
         return `
         <tr>
             <td>Mission ${idx+1}</td>
-            <td>
+            <td style="text-align: center">
                 <input
                     type="checkbox"
                     name=${idx}
                     value=${(1 << 6)}
-                    style="margin-bottom: 10px; margin-right: 10px"
+                    style="display: inline-block; margin: 20px"
                     ${mission & (1 << 6) ? "checked" : ""}
                 >
             </td>
-            <td>
+            <td style="text-align: center">
                 <input
                     type="checkbox"
                     name=${idx}
                     value=${(1 << 0)}
-                    style="margin-bottom: 10px; margin-right: 10px"
+                    style="display: inline-block; margin: 20px"
                     ${mission & (1 << 0) ? "checked" : ""}
                 >
             </td>
-            <td>
+            <td style="text-align: center">
                 <input
                     type="checkbox"
                     name=${idx}
                     value=${(1 << 7)}
-                    style="margin-bottom: 10px; margin-right: 10px"
+                    style="display: inline-block; margin: 20px"
                     ${mission & (1 << 7) ? "checked" : ""}
                 >
             </td>
         </tr>`;
     }
     const missions = `
-    <table id="missions">
+    <table id="missions" border="1px">
         <thead>
             <tr>
                 <th>Mission</th>

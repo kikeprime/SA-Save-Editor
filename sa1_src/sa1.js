@@ -66,9 +66,7 @@ export default class SA1 {
     
     load_dc(buffer, slot_settings, dci) {
         if (dci) {
-            for (let i = this.DCIHeader; i < buffer.length; i += 4) {
-                buffer.subarray(i, i + 4).reverse();
-            }
+            this.dci2vms(buffer);
         }
         for (let i = 0; i < 3; i++) {
             const j = slot_settings[i];
@@ -199,6 +197,13 @@ export default class SA1 {
 			reverse(0x056C, 4);
 		}
 		return buffer;
+    }
+    
+    dci2vms(buffer) {
+        for (let i = this.DCIHeader; i < buffer.length; i += 4) {
+            buffer.subarray(i, i + 4).reverse();
+        }
+        return buffer;
     }
     
     menu() {
