@@ -262,6 +262,10 @@ export default class SA1 {
                     tabs.create_adventure();
                     break;
                 }
+                case "Extra Emblems": {
+                    tabs.create_extra_emblems();
+                    break;
+                }
                 case "Story Flags": {
                     tabs.create_story_flags();
                     break;
@@ -274,12 +278,12 @@ export default class SA1 {
                     tabs.create_level_clear_counts();
                     break;
                 }
-                case "Missions": {
-                    tabs.create_missions();
-                    break;
-                }
                 case "General DX": {
                     tabs.create_general_dx();
+                    break;
+                }
+                case "Missions": {
+                    tabs.create_missions();
                     break;
                 }
                 default: {

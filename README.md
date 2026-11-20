@@ -37,6 +37,9 @@ Hosted via GitHub Pages at: https://kikeprime.github.io/SA-Save-Editor
         - Entrance
         - Level & Act
         - Destination
+    - Extra Emblems:
+        - Chao Race Emblems
+        - Adventure Field Emblems
     - Story Flags
     - Cutscene Flags
     - Level Clear Counts
