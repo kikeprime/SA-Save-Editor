@@ -262,6 +262,10 @@ export default class SA1 {
                     tabs.create_adventure();
                     break;
                 }
+                case "Sub Games": {
+                    tabs.create_sub_games();
+                    break;
+                }
                 case "Extra Emblems": {
                     tabs.create_extra_emblems();
                     break;

@@ -37,6 +37,19 @@ Hosted via GitHub Pages at: https://kikeprime.github.io/SA-Save-Editor
         - Entrance
         - Level & Act
         - Destination
+    - Sub Games:
+        - Sky Chase Act 1 & 2:
+            - Emblems
+            - High Scores for Sonic & Tails
+        - Ice Cap:
+            - Ice Cap Snowboarding doesn't have Emblems. It's not missing.
+            - High Scores for Sonic & Tails
+        - Sand Hill:
+            - Emblems
+            - High Scores for Sonic & Tails
+        - Hedgehog Hammer:
+            - Emblems
+            - High Scores
     - Extra Emblems:
         - Chao Race Emblems
         - Adventure Field Emblems
