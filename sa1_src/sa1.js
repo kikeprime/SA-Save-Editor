@@ -399,8 +399,10 @@ class SA1Slot {
                     dt.Array(dt.U8, 3, 0x01B0+i*0x0F+0x03, this.data),
                     dt.Array(dt.U8, 3, 0x01B0+i*0x0F+0x06, this.data),
                 ],
-                "lap1_time": dt.Array(dt.U8, 3, 0x01B0+i*0x0F+0x09, this.data),
-                "lap2_time": dt.Array(dt.U8, 3, 0x01B0+i*0x0F+0x0C, this.data),
+                "lap_times": [
+                    dt.Array(dt.U8, 3, 0x01B0+i*0x0F+0x09, this.data),
+                    dt.Array(dt.U8, 3, 0x01B0+i*0x0F+0x0C, this.data),
+                ],
             });
         }
         this.boss_times = [];
@@ -408,7 +410,7 @@ class SA1Slot {
 			this.boss_times[i] = [];
 			for (let j = 0; j < 3; j++) {
 				this.boss_times[i].push(
-					dt.Array(dt.U8, 3, 0x020A+i*0x09, this.data),
+					dt.Array(dt.U8, 3, 0x020A+i*0x09+j*0x03, this.data),
 				);
 			}
         }
@@ -458,8 +460,10 @@ class SA1Slot {
                 dt.Array(dt.U8, 3, 0x0554+0x03, this.data),
                 dt.Array(dt.U8, 3, 0x0554+0x06, this.data),
             ],
-            "lap1_time": dt.Array(dt.U8, 3, 0x0554+0x09, this.data),
-            "lap2_time": dt.Array(dt.U8, 3, 0x0554+0x0C, this.data),
+            "lap_times": [
+                dt.Array(dt.U8, 3, 0x0554+0x09, this.data),
+                dt.Array(dt.U8, 3, 0x0554+0x0C, this.data),
+            ],
         };
 		this.metal_boss_times = [];
         for (let i = 0; i < 3; i++) {

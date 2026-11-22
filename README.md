@@ -50,6 +50,12 @@ Hosted via GitHub Pages at: https://kikeprime.github.io/SA-Save-Editor
         - Hedgehog Hammer:
             - Emblems
             - High Scores
+        - Twinkle Circuit:
+            - Emblems
+            - Best Times
+            - Best Lap Times
+        - Boss:
+            - Best Times
     - Extra Emblems:
         - Chao Race Emblems
         - Adventure Field Emblems

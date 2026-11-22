@@ -8,6 +8,8 @@ export function create_sub_games() {
             <option value="Ice Cap">Ice Cap</option>
             <option value="Sand Hill">Sand Hill</option>
             <option value="Hedgehog Hammer">Hedgehog Hammer</option>
+            <option value="Twinkle Circuit">Twinkle Circuit</option>
+            <option value="Boss">Boss</option>
         </select>
         <div id="sa1sgdiv"></div>
     </div>`;
@@ -32,6 +34,14 @@ export function create_sub_games() {
             }
             case "Hedgehog Hammer": {
                 create_hedgehog_hammer();
+                break;
+            }
+            case "Twinkle Circuit": {
+                create_twinkle_circuit();
+                break;
+            }
+            case "Boss": {
+                create_boss();
                 break;
             }
         }
@@ -305,5 +315,314 @@ function create_hedgehog_hammer() {
             sa1.slot.emblems[idx] |= (1 << bit);
         else
             sa1.slot.emblems[idx] &= ~(1 << bit);
+    });
+}
+
+function create_twinkle_circuit() {
+    const sa1sgdiv = document.getElementById("sa1sgdiv");
+    const char_options = Object.entries(sa1.character_f_dict)
+        .map(([label, value]) => `<option value=${value}>${label}</option>`)
+        .join("");
+    sa1sgdiv.innerHTML = `
+    <div>
+        <select id="sa1sgtctabs">
+            ${char_options}
+        </select>
+        <div style="display: flex; gap: 20px">
+            <div id="twinkle_circuit_times">
+                <h3>Best Times:</h3>
+                <div style="display: flex; align-items: center; gap: 10px">
+                    <input
+                        type="number"
+                        name=0
+                        value=${sa1.slot.twinkle_circuit_times[0]["best_times"][0][0]}
+                        min=0
+                        max=99
+                        step=1
+                    >
+                    <input
+                        type="number"
+                        name=1
+                        value=${sa1.slot.twinkle_circuit_times[0]["best_times"][0][1]}
+                        min=0
+                        max=59
+                        step=1
+                    >
+                    <input
+                        type="number"
+                        name=2
+                        value=${sa1.slot.twinkle_circuit_times[0]["best_times"][0][2]}
+                        min=0
+                        max=99
+                        step=1
+                    >
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px">
+                    <input
+                        type="number"
+                        name=3
+                        value=${sa1.slot.twinkle_circuit_times[0]["best_times"][1][0]}
+                        min=0
+                        max=99
+                        step=1
+                    >
+                    <input
+                        type="number"
+                        name=4
+                        value=${sa1.slot.twinkle_circuit_times[0]["best_times"][1][1]}
+                        min=0
+                        max=59
+                        step=1
+                    >
+                    <input
+                        type="number"
+                        name=5
+                        value=${sa1.slot.twinkle_circuit_times[0]["best_times"][1][2]}
+                        min=0
+                        max=99
+                        step=1
+                    >
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px">
+                    <input
+                        type="number"
+                        name=6
+                        value=${sa1.slot.twinkle_circuit_times[0]["best_times"][2][0]}
+                        min=0
+                        max=99
+                        step=1
+                    >
+                    <input
+                        type="number"
+                        name=7
+                        value=${sa1.slot.twinkle_circuit_times[0]["best_times"][2][1]}
+                        min=0
+                        max=59
+                        step=1
+                    >
+                    <input
+                        type="number"
+                        name=8
+                        value=${sa1.slot.twinkle_circuit_times[0]["best_times"][2][2]}
+                        min=0
+                        max=99
+                        step=1
+                    >
+                </div>
+            </div>
+            <div id="twinkle_circuit_lap_times">
+                <h3>Best Lap Times:</h3>
+                <div style="display: flex; align-items: center; gap: 10px">
+                    Lap 1:
+                    <input
+                        type="number"
+                        name=0
+                        value=${sa1.slot.twinkle_circuit_times[0]["lap_times"][0][0]}
+                        min=0
+                        max=99
+                        step=1
+                    >
+                    <input
+                        type="number"
+                        name=1
+                        value=${sa1.slot.twinkle_circuit_times[0]["lap_times"][0][1]}
+                        min=0
+                        max=59
+                        step=1
+                    >
+                    <input
+                        type="number"
+                        name=2
+                        min=0
+                        value=${sa1.slot.twinkle_circuit_times[0]["lap_times"][0][2]}
+                        max=99
+                        step=1
+                    >
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px">
+                    Lap 2:
+                    <input
+                        type="number"
+                        name=3
+                        value=${sa1.slot.twinkle_circuit_times[0]["lap_times"][1][0]}
+                        min=0
+                        max=99
+                        step=1
+                    >
+                    <input
+                        type="number"
+                        name=4
+                        value=${sa1.slot.twinkle_circuit_times[0]["lap_times"][1][1]}
+                        min=0
+                        max=59
+                        step=1
+                    >
+                    <input
+                        type="number"
+                        name=5
+                        value=${sa1.slot.twinkle_circuit_times[0]["lap_times"][1][2]}
+                        min=0
+                        max=99
+                        step=1
+                    >
+                </div>
+            </div>
+            <div id="twinkle_circuit_emblems" style="display: flex">
+                <input
+                    type="checkbox"
+                    class="sa1-emblem"
+                    value=${0x0C0}
+                    ${sa1.slot.emblems[0x0C] & (1 << 0) ? "checked" : ""}
+                >
+                <input
+                    type="checkbox"
+                    class="sa1-emblem"
+                    value=${0x0C5}
+                    ${sa1.slot.emblems[0x0C] & (1 << 5) ? "checked" : ""}
+                >
+            </div>
+        </div>
+    </div>`;
+    const sa1sgtctabs = document.getElementById("sa1sgtctabs");
+    const twinkle_circuit_times = document.getElementById("twinkle_circuit_times");
+    sa1sgtctabs.addEventListener("change", () => {
+        twinkle_circuit_times.querySelectorAll("input")
+            .forEach(input => {
+                const name = input.name;
+                input.value = sa1.slot.twinkle_circuit_times[sa1sgtctabs.value]["best_times"][Math.floor(name / 3)][name % 3];
+            });
+        twinkle_circuit_lap_times.querySelectorAll("input")
+            .forEach(input => {
+                const name = input.name;
+                input.value = sa1.slot.twinkle_circuit_times[sa1sgtctabs.value]["lap_times"][Math.floor(name / 3)][name % 3];
+            });
+    });
+    twinkle_circuit_times.addEventListener("change", (e) => {
+        const name = e.target.name;
+        if (e.target.validity.valid)
+            sa1.slot.twinkle_circuit_times[sa1sgtctabs.value]["best_times"][Math.floor(name / 3)][name % 3] = e.target.value;
+        e.target.value = sa1.slot.twinkle_circuit_times[sa1sgtctabs.value]["best_times"][Math.floor(name / 3)][name % 3];
+    });
+    twinkle_circuit_lap_times.addEventListener("change", (e) => {
+        const name = e.target.name;
+        if (e.target.validity.valid)
+            sa1.slot.twinkle_circuit_times[sa1sgtctabs.value]["lap_times"][Math.floor(name / 3)][name % 3] = e.target.value;
+        e.target.value = sa1.slot.twinkle_circuit_times[sa1sgtctabs.value]["lap_times"][Math.floor(name / 3)][name % 3];
+    });
+    twinkle_circuit_emblems.addEventListener("change", (e) => {
+        const idx = Math.floor(e.target.value / 16);
+        const bit = e.target.value % 16;
+        if (e.target.checked)
+            sa1.slot.emblems[idx] |= (1 << bit);
+        else
+            sa1.slot.emblems[idx] &= ~(1 << bit);
+    });
+}
+
+function create_boss() {
+    const sa1sgdiv = document.getElementById("sa1sgdiv");
+    const char_options = Object.entries(sa1.character_f_dict)
+        .map(([label, value]) => `<option value=${value}>${label}</option>`)
+        .join("");
+    sa1sgdiv.innerHTML = `
+    <div>
+        <select id="sa1sgbtabs">
+            ${char_options}
+        </select>
+        <div id="boss_times">
+            <div style="display: flex; align-items: center; gap: 10px">
+                <input
+                    type="number"
+                    name=0
+                    value=${sa1.slot.boss_times[0][0][0]}
+                    min=0
+                    max=99
+                    step=1
+                >
+                <input
+                    type="number"
+                    name=1
+                    value=${sa1.slot.boss_times[0][0][1]}
+                    min=0
+                    max=59
+                    step=1
+                >
+                <input
+                    type="number"
+                    name=2
+                    value=${sa1.slot.boss_times[0][0][2]}
+                    min=0
+                    max=99
+                    step=1
+                >
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px">
+                <input
+                    type="number"
+                    name=3
+                    value=${sa1.slot.boss_times[0][1][0]}
+                    min=0
+                    max=99
+                    step=1
+                >
+                <input
+                    type="number"
+                    name=4
+                    value=${sa1.slot.boss_times[0][1][1]}
+                    min=0
+                    max=59
+                    step=1
+                >
+                <input
+                    type="number"
+                    name=5
+                    value=${sa1.slot.boss_times[0][1][2]}
+                    min=0
+                    max=99
+                    step=1
+                >
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px">
+                <input
+                    type="number"
+                    name=6
+                    value=${sa1.slot.boss_times[0][2][0]}
+                    min=0
+                    max=99
+                    step=1
+                >
+                <input
+                    type="number"
+                    name=7
+                    value=${sa1.slot.boss_times[0][2][1]}
+                    min=0
+                    max=59
+                    step=1
+                >
+                <input
+                    type="number"
+                    name=8
+                    value=${sa1.slot.boss_times[0][2][2]}
+                    min=0
+                    max=99
+                    step=1
+                >
+            </div>
+        </div>
+    </div>`;
+    const sa1sgbtabs = document.getElementById("sa1sgbtabs");
+    const boss_times = document.getElementById("boss_times");
+    sa1sgbtabs.addEventListener("change", () => {
+        boss_times.querySelectorAll("input")
+            .forEach(input => {
+                const name = input.name;
+                input.value = sa1.slot.boss_times[sa1sgbtabs.value][Math.floor(name / 3)][name % 3];
+            });
+    });
+    boss_times.addEventListener("change", (e) => {
+        const name = e.target.name;
+        if (e.target.validity.valid)
+            sa1.slot.boss_times[sa1sgbtabs.value][Math.floor(name / 3)][name % 3] = e.target.value;
+        e.target.value = sa1.slot.boss_times[sa1sgbtabs.value][Math.floor(name / 3)][name % 3];
     });
 }

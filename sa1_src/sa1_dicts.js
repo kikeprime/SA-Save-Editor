@@ -19,6 +19,14 @@ function main_dicts(obj) {
         "Big": 7,
         "None": 255,
     };
+    obj.character_f_dict = {
+        "Sonic": 0,
+        "Tails": 1,
+        "Knuckles": 2,
+        "Amy": 3,
+        "Gamma": 4,
+        "Big": 5,
+    };
 	obj.MessageOptions = [
 		"Voice and Text",
 		"Voice Only",
