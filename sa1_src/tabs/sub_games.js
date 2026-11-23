@@ -485,6 +485,7 @@ function create_twinkle_circuit() {
     </div>`;
     const sa1sgtctabs = document.getElementById("sa1sgtctabs");
     const twinkle_circuit_times = document.getElementById("twinkle_circuit_times");
+    const twinkle_circuit_lap_times = document.getElementById("twinkle_circuit_lap_times");
     sa1sgtctabs.addEventListener("change", () => {
         twinkle_circuit_times.querySelectorAll("input")
             .forEach(input => {

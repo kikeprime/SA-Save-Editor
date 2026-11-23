@@ -290,6 +290,10 @@ export default class SA1 {
                     tabs.create_missions();
                     break;
                 }
+                case "Metal Sonic": {
+                    tabs.create_metal_sonic();
+                    break;
+                }
                 default: {
                     sa1div.innerHTML = "";
                     break;

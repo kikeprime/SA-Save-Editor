@@ -66,6 +66,17 @@ Hosted via GitHub Pages at: https://kikeprime.github.io/SA-Save-Editor
     - General:
         - Black Market Rings
     - Missions
+    - Metal Sonic:
+        - Sub Games:
+            - Ice Cap:
+                - High Scores
+            - Sand Hill:
+                - High Scores
+            - Twinkle Circuit:
+                - Best Times
+                - Best Lap Times
+            - Boss:
+                - Best Times
 
 # Documentation
 For now, `sa1_src/sa1.js` doubles as save file documentations for the respective games. It's another long term goal to create user-friendly documentations.
