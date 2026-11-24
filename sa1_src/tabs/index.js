@@ -1,5 +1,6 @@
 export { create_general } from "./general.js"
 export { create_adventure } from "./adventure.js"
+export { create_action_stages } from "./action_stages.js"
 export { create_sub_games } from "./sub_games.js"
 export { create_extra_emblems } from "./extra_emblems.js"
 export { create_story_flags } from "./story_flags.js"

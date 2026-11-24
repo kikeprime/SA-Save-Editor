@@ -79,8 +79,10 @@ export default class SA1 {
     }
     
     load_gc(buffer, slot) {
-        this.byteswap(buffer.subarray(this.GCHeader));
-        this.slots[slot] = new SA1Slot(buffer.slice(this.GCHeader));
+        const size = new TextDecoder("ASCII").decode(buffer.subarray(0, 6)) == "RELSAB" ? this.SA1Size : this.SADXSize;
+        this.byteswap(buffer.subarray(this.GCHeader, this.GCHeader + size));
+        this.slots[slot] = new SA1Slot(this.templates[5].slice());
+        this.slots[slot].buffer.set(buffer.slice(this.GCHeader, this.GCHeader + size));
     }
     
     load_pc(buffer, slot) {
@@ -113,6 +115,16 @@ export default class SA1 {
                 buffer.set(this.byteswap(this.slot.buffer.slice()), this.GCHeader);
 				if (!version.endsWith("usa"))
 					buffer[3] = new TextEncoder("ASCII").encode(version.endsWith("jp") ? 'J' : 'P');
+				buffer[0x25] = buffer[0x59] = 0x31 + Number(document.getElementById("slot").value);
+				let emblems = 0;
+				this.slot.emblems.forEach(b => {
+				    for (let i = 0; i < 8; i++) {
+				        if (b & (1 << i))
+				            emblems += 1;
+				    }
+				});
+				const emblemcnt = new TextEncoder("ASCII").encode(emblems.toString().padStart(3, " "));
+				buffer.set(emblemcnt, 0x72);
                 break;
             }
             case "sa1gcpv": {
@@ -122,6 +134,16 @@ export default class SA1 {
                 const checksum = new dt.U16(0x0000, data);
                 this.calculate_checksum(checksum, slot);
                 buffer.set(this.byteswap(slot), this.GCHeader);
+				buffer[0x25] = 0x31 + document.getElementById("slot").value;
+				let emblems = 0;
+				this.slot.emblems.forEach(b => {
+				    for (let i = 0; i < 8; i++) {
+				        if (b & (1 << i))
+				            emblems += 1;
+				    }
+				});
+				const emblemcnt = new TextEncoder("ASCII").encode(emblems.toString().padStart(3, " "));
+				buffer.set(emblemcnt, 0x70);
                 break;
             }
         }
@@ -262,6 +284,10 @@ export default class SA1 {
                     tabs.create_adventure();
                     break;
                 }
+                case "Action Stages": {
+                    tabs.create_action_stages();
+                    break;
+                }
                 case "Sub Games": {
                     tabs.create_sub_games();
                     break;
@@ -307,11 +333,12 @@ export default class SA1 {
     
     // ToDo
     suggestedName(version) {
-        if (version.contains("dc")) {
+        if (version.includes("dc")) {
             return "SONICADV_INT.vms";
         }
-        if (version.contains("gc")) {
-            return "SonicDX01.gci";
+        if (version.includes("gc")) {
+            const slot = Number(document.getElementById("slot").value) + 1;
+            return `SONICADVENTURE_DX_PLAYRECORD_${slot}.gci`;
         }
         return "SonicDX01.snc";
     }

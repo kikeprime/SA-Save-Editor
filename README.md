@@ -18,6 +18,11 @@ Hosted via GitHub Pages at: https://kikeprime.github.io/SA-Save-Editor
 - GameCube .gci: Input and Output
 - PC .snc: Input and Output
 
+## Version Notes
+- For Dreamcast and GameCube files the container metadata is ignored on load.
+- For GameCube output the slot is set to the one it's exported from. Emblem count metadata is updated.
+- GameCube Preview input is detected by the file's header if the input mode is set to GameCube.
+
 ## Sonic Adventure
 - Sonic Adventure:
     - General:

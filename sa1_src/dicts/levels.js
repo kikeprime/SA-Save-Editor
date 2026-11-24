@@ -45,4 +45,51 @@ export function level_dicts(obj) {
 		"Chao Race",
 		"None",
 	];
+	obj.stage_dict = {
+	    "Sonic": [
+    		"Emerald Coast",
+    		"Windy Valley",
+    		"Twinkle Park",
+    		"Speed Highway",
+    		"Red Mountain",
+    		"Sky Deck",
+    		"Lost World",
+    		"Ice Cap",
+    		"Casinopolis",
+    		"Final Egg",
+	    ],
+	    "Tails": [
+    		"Windy Valley",
+    		"Speed Highway",
+    		"Red Mountain",
+    		"Sky Deck",
+    		"Ice Cap",
+    		"Casinopolis",
+	    ],
+	    "Knuckles": [
+    		"Speed Highway",
+    		"Red Mountain",
+    		"Sky Deck",
+    		"Lost World",
+    		"Casinopolis",
+	    ],
+	    "Amy": [
+    		"Twinkle Park",
+    		"Final Egg",
+    		"Hot Shelter",
+	    ],
+	    "Gamma": [
+    		"Emerald Coast",
+    		"Windy Valley",
+    		"Red Mountain",
+    		"Final Egg",
+    		"Hot Shelter",
+	    ],
+	    "Big": [
+    		"Emerald Coast",
+    		"Twinkle Park",
+    		"Ice Cap",
+    		"Hot Shelter",
+	    ],
+	};
 }
