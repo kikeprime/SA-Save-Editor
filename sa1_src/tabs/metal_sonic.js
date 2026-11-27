@@ -50,13 +50,13 @@ function create_metal_sonic_action_stages() {
         <input
             type="checkbox"
             class="sa1-metal-emblem"
-            name=10
+            name=1
             value=0
         >
         <input
             type="checkbox"
             class="sa1-metal-emblem"
-            name=20
+            name=2
             value=0
         >
     </div>`;
@@ -156,7 +156,7 @@ function metal_sonic_action_stages_callbacks() {
     function tab_sel() {
         const idx = Number(sa1msastabs.value);
         metal_level_emblems.querySelectorAll("input").forEach(input => {
-            input.value = Number(input.name) + idx;
+            input.value = idx * 3 + Number(input.name);
             input.checked = sa1.slot.metal_emblems[Math.floor(input.value / 8)] & (1 << input.value % 8)
         });
         metal_level_scores.value = sa1.slot.metal_level_scores[idx];
