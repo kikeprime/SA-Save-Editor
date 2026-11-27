@@ -42,6 +42,12 @@ Hosted via GitHub Pages at: https://kikeprime.github.io/SA-Save-Editor
         - Entrance
         - Level & Act
         - Destination
+    - Action Stages:
+        - Emblems
+        - Best Score
+        - Best Clear Time (except Big)
+        - Best Weights (Big)
+        - Most Rings
     - Sub Games:
         - Sky Chase Act 1 & 2:
             - Emblems

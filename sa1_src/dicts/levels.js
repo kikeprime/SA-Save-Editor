@@ -45,7 +45,7 @@ export function level_dicts(obj) {
 		"Chao Race",
 		"None",
 	];
-	obj.stage_dict = {
+	obj.stage_list_dict = {
 	    "Sonic": [
     		"Emerald Coast",
     		"Windy Valley",
@@ -61,7 +61,6 @@ export function level_dicts(obj) {
 	    "Tails": [
     		"Windy Valley",
     		"Speed Highway",
-    		"Red Mountain",
     		"Sky Deck",
     		"Ice Cap",
     		"Casinopolis",
@@ -92,4 +91,50 @@ export function level_dicts(obj) {
     		"Hot Shelter",
 	    ],
 	};
+    obj.stage_dict = {
+        "Sonic": {
+            "Emerald Coast": 0x00,
+            "Windy Valley": 0x01,
+            "Casinopolis": 0x08,
+            "Ice Cap": 0x07,
+            "Twinkle Park": 0x02,
+            "Speed Highway": 0x03,
+            "Red Mountain": 0x04,
+            "Sky Deck": 0x05,
+            "Lost World": 0x06,
+            "Final Egg": 0x09,
+        },
+        "Tails": {
+            "Windy Valley": 0x0A,
+            "Casinopolis": 0x0E,
+            "Ice Cap": 0x0D,
+            "Sky Deck": 0x0C,
+            "Speed Highway": 0x0B,
+        },
+        "Knuckles": {
+            "Speed Highway": 0x0F,
+            "Casinopolis": 0x13,
+            "Red Mountain": 0x10,
+            "Lost World": 0x12,
+            "Sky Deck": 0x11,
+        },
+        "Amy": {
+            "Twinkle Park": 0x14,
+            "Hot Shelter": 0x16,
+            "Final Egg": 0x15,
+        },
+        "Gamma": {
+            "Final Egg": 0x1A,
+            "Emerald Coast": 0x17,
+            "Windy Valley": 0x18,
+            "Red Mountain": 0x19,
+            "Hot Shelter": 0x1B,
+        },
+        "Big": {
+            "Twinkle Park": 0x1D,
+            "Ice Cap": 0x1E,
+            "Emerald Coast": 0x1C,
+            "Hot Shelter": 0x1F,
+        },
+    };
 }

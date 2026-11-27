@@ -353,7 +353,7 @@ function create_twinkle_circuit() {
                         name=2
                         value=${sa1.slot.twinkle_circuit_times[0]["best_times"][0][2]}
                         min=0
-                        max=99
+                        max=59
                         step=1
                     >
                 </div>
@@ -379,7 +379,7 @@ function create_twinkle_circuit() {
                         name=5
                         value=${sa1.slot.twinkle_circuit_times[0]["best_times"][1][2]}
                         min=0
-                        max=99
+                        max=59
                         step=1
                     >
                 </div>
@@ -405,7 +405,7 @@ function create_twinkle_circuit() {
                         name=8
                         value=${sa1.slot.twinkle_circuit_times[0]["best_times"][2][2]}
                         min=0
-                        max=99
+                        max=59
                         step=1
                     >
                 </div>
@@ -435,7 +435,7 @@ function create_twinkle_circuit() {
                         name=2
                         min=0
                         value=${sa1.slot.twinkle_circuit_times[0]["lap_times"][0][2]}
-                        max=99
+                        max=59
                         step=1
                     >
                 </div>
@@ -462,7 +462,7 @@ function create_twinkle_circuit() {
                         name=5
                         value=${sa1.slot.twinkle_circuit_times[0]["lap_times"][1][2]}
                         min=0
-                        max=99
+                        max=59
                         step=1
                     >
                 </div>
@@ -553,7 +553,7 @@ function create_boss() {
                     name=2
                     value=${sa1.slot.boss_times[0][0][2]}
                     min=0
-                    max=99
+                    max=59
                     step=1
                 >
             </div>
@@ -579,7 +579,7 @@ function create_boss() {
                     name=5
                     value=${sa1.slot.boss_times[0][1][2]}
                     min=0
-                    max=99
+                    max=59
                     step=1
                 >
             </div>
@@ -605,7 +605,7 @@ function create_boss() {
                     name=8
                     value=${sa1.slot.boss_times[0][2][2]}
                     min=0
-                    max=99
+                    max=59
                     step=1
                 >
             </div>
