@@ -44,7 +44,7 @@ export function create_action_stages() {
             type="number"
             id="level_scores"
             min=0
-            max=999999
+            max=${0x7FFFFFFF}
             step=1
         >`;
         const level_times = sa1astabs.value == 5 ? "" : `
@@ -167,6 +167,8 @@ function action_stages_callbacks() {
             if (e.target.validity.valid)
                 sa1.slot.level_times[sa1asltabs.value][e.target.name] = e.target.value;
             e.target.value = sa1.slot.level_times[sa1asltabs.value][e.target.name];
+            if (e.target.name == 2)
+                level_times.querySelector(`input[name="3"]`).value = Math.floor(e.target.value * 100 / 60);
         });
     }
     const level_weights = document.getElementById("level_weights");
@@ -212,4 +214,3 @@ function action_stages_callbacks() {
     sa1asltabs.addEventListener("change", () => level_sel());
     level_sel();
 }
-

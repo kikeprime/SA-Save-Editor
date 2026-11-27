@@ -3,6 +3,7 @@ export function create_metal_sonic() {
     sa1div.innerHTML = `
     <div>
         <select id="sa1mstabs">
+            <option value="Action Stages">Action Stages</option>
             <option value="Sub Games">Sub Games</option>
         </select>
         <div id="sa1msdiv"></div>
@@ -10,6 +11,10 @@ export function create_metal_sonic() {
     const sa1mstabs = document.getElementById("sa1mstabs");
     function tab_sel() {
         switch (sa1mstabs.value) {
+            case "Action Stages": {
+                create_metal_sonic_action_stages();
+                break;
+            }
             case "Sub Games": {
                 create_metal_sonic_sub_games();
                 break;
@@ -19,7 +24,159 @@ export function create_metal_sonic() {
     tab_sel();
 }
 
-export function create_metal_sonic_sub_games() {
+function create_metal_sonic_action_stages() {
+    const sa1msdiv = document.getElementById("sa1msdiv");
+    const level_options = Object.entries(sa1.stage_dict["Sonic"])
+        .map(([label, value]) => `<option value=${value}>${label}</option>`)
+        .join("");
+    sa1msdiv.innerHTML = `
+    <div>
+        <select id="sa1msastabs">
+            ${level_options}
+        </select>
+        <div id="sa1msasdiv"></div>
+    </div>`;
+    const sa1msastabs = document.getElementById("sa1msastabs");
+    const sa1msasdiv = document.getElementById("sa1msasdiv");
+    const metal_level_emblems = `
+    <h3>Emblems:</h3>
+    <div id="metal_level_emblems" style="display: flex">
+        <input
+            type="checkbox"
+            class="sa1-metal-emblem"
+            name=0
+            value=0
+        >
+        <input
+            type="checkbox"
+            class="sa1-metal-emblem"
+            name=10
+            value=0
+        >
+        <input
+            type="checkbox"
+            class="sa1-metal-emblem"
+            name=20
+            value=0
+        >
+    </div>`;
+    const metal_level_scores = `
+    <h3>Best Score:</h3>
+    <input
+        type="number"
+        id="metal_level_scores"
+        min=0
+        max=${0x7FFFFFFF}
+        step=1
+    >`;
+    const metal_level_times = `
+    <div id="metal_level_times">
+        <h3>Best Clear Time:</h3>
+        <div style="display: flex; align-items: center; gap: 20px">
+            <input
+                type="number"
+                name=0
+                min=0
+                max=99
+                step=1
+            >
+            <input
+                type="number"
+                name=1
+                min=0
+                max=59
+                step=1
+            >
+            <input
+                type="number"
+                name=2
+                min=0
+                max=59
+                step=1
+            >
+            <input
+                type="number"
+                name=3
+                min=0
+                max=99
+                step=1
+                disabled=true
+            >
+        </div>
+    </div>`;
+    const metal_level_rings = `
+    <h3>Most Rings:</h3>
+    <input
+        type="number"
+        id="metal_level_rings"
+        min=0
+        max=999999
+        step=1
+    >`;
+    sa1msasdiv.innerHTML = `
+    <div>
+        ${metal_level_emblems}
+        ${metal_level_scores}
+        ${metal_level_times}
+        ${metal_level_rings}
+    </div>`;
+    metal_sonic_action_stages_callbacks();
+}
+
+function metal_sonic_action_stages_callbacks() {
+    const metal_level_emblems = document.getElementById("metal_level_emblems");
+    metal_level_emblems.addEventListener("change", (e) => {
+        const idx = Math.floor(e.target.value / 8);
+        const bit = e.target.value % 8;
+        if (e.target.checked)
+            sa1.slot.metal_emblems[idx] |= (1 << bit);
+        else
+            sa1.slot.metal_emblems[idx] &= ~(1 << bit);
+    });
+    const metal_level_scores = document.getElementById("metal_level_scores");
+    metal_level_scores.addEventListener("change", () => {
+        if (metal_level_scores.validity.valid)
+            sa1.slot.metal_level_scores[sa1msastabs.value] = metal_level_scores.value;
+        metal_level_scores.value = sa1.slot.metal_level_scores[sa1msastabs.value];
+    });
+    const metal_level_times = document.getElementById("metal_level_times");
+    metal_level_times.addEventListener("change", (e) => {
+        if (e.target.validity.valid)
+            sa1.slot.metal_level_times[sa1msastabs.value][e.target.name] = e.target.value;
+        e.target.value = sa1.slot.metal_level_times[sa1msastabs.value][e.target.name];
+        if (e.target.name == 2)
+            metal_level_times.querySelector(`input[name="3"]`).value = Math.floor(e.target.value * 100 / 60);
+    });
+    const metal_level_rings = document.getElementById("metal_level_rings");
+    metal_level_rings.addEventListener("change", () => {
+        if (metal_level_rings.validity.valid)
+            sa1.slot.metal_level_rings[sa1msastabs.value] = metal_level_rings.value;
+        metal_level_rings.value = sa1.slot.metal_level_rings[sa1msastabs.value];
+    });
+    function tab_sel() {
+        const idx = Number(sa1msastabs.value);
+        metal_level_emblems.querySelectorAll("input").forEach(input => {
+            input.value = Number(input.name) + idx;
+            input.checked = sa1.slot.metal_emblems[Math.floor(input.value / 8)] & (1 << input.value % 8)
+        });
+        metal_level_scores.value = sa1.slot.metal_level_scores[idx];
+        let centiseconds = 0;
+        metal_level_times.querySelectorAll("input").forEach(input => {
+            if (input.name < 3) {
+                input.value = sa1.slot.metal_level_times[idx][input.name];
+                if (input.name == 2)
+                    centiseconds = Math.floor(input.value * 100 / 60);
+            }
+            else
+                input.value = centiseconds;
+        });
+        metal_level_rings.value = sa1.slot.metal_level_rings[idx];
+    }
+    sa1msastabs.addEventListener("change", () => tab_sel());
+    tab_sel();
+}
+
+function create_metal_sonic_sub_games() {
     const sa1msdiv = document.getElementById("sa1msdiv");
     sa1msdiv.innerHTML = `
     <div>

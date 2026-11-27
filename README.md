@@ -7,7 +7,7 @@ List of supported games:
 
 An online save editor remake of SASave from SA Tools to create a crossplatform Sonic Adventure save editor. The projects current scope is a straightforward reimplementation of SASave. This means the following differences from my previous save editor projects. One, I'm not researching the save file myself. Two, on crosssave, a template file from SASave's repo is used to create the save file. Under the hood your loaded save file is converted to PC format which is easily converted to all versions.
 
-The SA2 Save Utility's port is also considered but currently not planned.
+It started as an SASave remake but the considered scope widened to SA1 Dreamcast Chao Garden save files and Chao Adventure / Chao Upload Data files too remaking the related functionality of VMSEditor from SA Tools. For PC Chao related stuff (both SADX and SA2B) there are two mature memory editors so I don't think an online save editor is worth it.
 
 Hosted via GitHub Pages at: https://kikeprime.github.io/SA-Save-Editor
 
@@ -24,6 +24,7 @@ Hosted via GitHub Pages at: https://kikeprime.github.io/SA-Save-Editor
 - GameCube Preview input is detected by the file's header if the input mode is set to GameCube.
 
 ## Sonic Adventure
+The main save file's editor is feature complete.
 - Sonic Adventure:
     - General:
         - Playtime
@@ -78,6 +79,11 @@ Hosted via GitHub Pages at: https://kikeprime.github.io/SA-Save-Editor
         - Black Market Rings
     - Missions
     - Metal Sonic:
+        - Action Stages:
+            - Emblems
+            - Best Score
+            - Best Clear Time
+            - Most Rings
         - Sub Games:
             - Ice Cap:
                 - High Scores
@@ -91,10 +97,6 @@ Hosted via GitHub Pages at: https://kikeprime.github.io/SA-Save-Editor
 
 # Documentation
 For now, `sa1_src/sa1.js` doubles as save file documentations for the respective games. It's another long term goal to create user-friendly documentations.
-
-# Known issues
-- It's heavily work in progress so expect issues.
-- There are placeholder tabs that won't show anything. This isn't a bug, they just aren't implemented yet.
 
 # Special thanks
 - The X-Hax community for SASave and the tons of help I got when I actively modded SA1&2
